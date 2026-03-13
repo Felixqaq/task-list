@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.LinkedList;
 
 public class Main implements Runnable{
     private static final String QUIT = "quit";
@@ -68,8 +67,7 @@ public class Main implements Runnable{
     }
 
     private void show() {
-        LinkedList<Project> projects = taskList.getProjects();
-        for (Project project : projects) {
+        for (Project project : taskList.getProjects()) {
             out.println(project.getName());
             for (Task task : project.getTasks()) {
                 out.printf("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());
