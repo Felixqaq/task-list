@@ -21,10 +21,10 @@ public final class TaskList {
         return true;
     }
 
-    public boolean addTask(String project, String description) {
-        for (Project p : projects) {
-            if (p.getName().equals(project)) {
-                p.getTasks().add(new Task(nextId(), description, false));
+    public boolean addTask(String projectName, String description) {
+        for (Project project : projects) {
+            if (project.getName().equals(projectName)) {
+                project.getTasks().add(new Task(nextId(), description, false));
                 return true;
             }
         }
