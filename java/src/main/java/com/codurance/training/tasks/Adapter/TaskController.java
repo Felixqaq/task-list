@@ -1,5 +1,6 @@
 package com.codurance.training.tasks.Adapter;
 
+import com.codurance.training.tasks.Entity.TaskList;
 import com.codurance.training.tasks.UseCase.AddProjectUseCase;
 import com.codurance.training.tasks.UseCase.CheckUseCase;
 import com.codurance.training.tasks.UseCase.ErrorUseCase;
@@ -7,9 +8,10 @@ import com.codurance.training.tasks.UseCase.HelpUseCase;
 import com.codurance.training.tasks.UseCase.ShowUseCase;
 
 public class TaskController{
-    public static void execute(String commandLine) {
+    public void execute(String commandLine) {
         String[] commandRest = commandLine.split(" ", 2);
         String command = commandRest[0];
+        TaskList taskList = new TaskList();
         switch (command) {
             case "show":
                 ShowUseCase.show();

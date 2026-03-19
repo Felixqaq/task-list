@@ -6,8 +6,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 import com.codurance.training.tasks.Adapter.TaskController;
-import com.codurance.training.tasks.Entity.Project;
-import com.codurance.training.tasks.Entity.Task;
 import com.codurance.training.tasks.Entity.TaskList;
 
 public class Main implements Runnable{
@@ -15,8 +13,8 @@ public class Main implements Runnable{
 
     private final BufferedReader in;
     private final PrintWriter out;
+    private TaskController taskController = new TaskController();
 
-    private TaskList taskList = new TaskList();
     public Main(BufferedReader reader, PrintWriter writer) {
         this.in = reader;
         this.out = writer;
@@ -42,16 +40,7 @@ public class Main implements Runnable{
             if (command.equals(QUIT)) {
                 break;
             }
-            TaskController.execute(command);
+            taskController.execute(command);
         }
-    }
-
-    private void help() {
-        
-    }
-
-    private void error(String command) {
-        out.printf("I don't know what the command \"%s\" is.", command);
-        out.println();
     }
 }

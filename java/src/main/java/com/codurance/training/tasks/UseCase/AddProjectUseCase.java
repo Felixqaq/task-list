@@ -2,7 +2,7 @@ package com.codurance.training.tasks.UseCase;
 
 public class AddProjectUseCase{
 
-    private void add(String commandLine) {
+    public void add(String commandLine) {
         String[] subcommandRest = commandLine.split(" ", 2);
         String subcommand = subcommandRest[0];
         if (subcommand.equals("project")) {
@@ -15,5 +15,4 @@ public class AddProjectUseCase{
             }
         }
     }
-    
 }
