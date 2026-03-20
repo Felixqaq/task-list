@@ -1,8 +1,15 @@
 package com.codurance.training.tasks.UseCase;
 
-public class AddProjectUseCase{
+import com.codurance.training.tasks.Entity.TaskList;
 
-    public void add(String commandLine) {
+public class AddProjectUseCase{
+    private TaskList taskList;
+    
+    public AddProjectUseCase(TaskList taskList) {
+        this.taskList = taskList;
+    }
+
+    public String add(String commandLine) {
         String[] subcommandRest = commandLine.split(" ", 2);
         String subcommand = subcommandRest[0];
         if (subcommand.equals("project")) {
@@ -10,9 +17,9 @@ public class AddProjectUseCase{
         } else if (subcommand.equals("task")) {
             String[] projectTask = subcommandRest[1].split(" ", 2);
             if (!taskList.addTask(projectTask[0], projectTask[1])){
-                out.printf("Could not find a project with the name \"%s\".", projectTask[0]);
-                out.println();
+                return String.format("Could not find a project with the name \"%s\".\n", projectTask[0]);
             }
         }
+        return "";
     }
 }

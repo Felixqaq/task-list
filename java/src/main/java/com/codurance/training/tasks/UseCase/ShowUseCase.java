@@ -2,17 +2,25 @@ package com.codurance.training.tasks.UseCase;
 
 import com.codurance.training.tasks.Entity.Project;
 import com.codurance.training.tasks.Entity.Task;
+import com.codurance.training.tasks.Entity.TaskList;
 
 public class ShowUseCase{
+    private TaskList taskList;
+    
+    public ShowUseCase(TaskList taskList) {
+        this.taskList = taskList;
+    }
 
-    public static void show() {
+    public String show() {
+        StringBuilder sb = new StringBuilder();
         for (Project project : taskList.getProjects()) {
-            out.println(project.getName());
+            sb.append(project.getName()).append("\n");
             for (Task task : project.getTasks()) {
-                out.printf("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());
+                sb.append(String.format("    [%c] %d: %s\n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription()));
             }
-            out.println();
+            sb.append("\n");
         }
+        return sb.toString();
     }
 
 }

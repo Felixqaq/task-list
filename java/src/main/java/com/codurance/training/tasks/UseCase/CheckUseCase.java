@@ -1,19 +1,25 @@
 package com.codurance.training.tasks.UseCase;
 
-public class CheckUseCase {
+import com.codurance.training.tasks.Entity.TaskList;
 
-    private void check(String idString) {
-        if(!taskList.check(idString)){
-            out.printf("Could not find a task with an ID of %d.", idString);
-            out.println();
-        }
+public class CheckUseCase {
+    private TaskList taskList;
+    public CheckUseCase(TaskList taskList) {
+        this.taskList = taskList;
     }
 
-    private void uncheck(String idString) {
-        if(!taskList.uncheck(idString)){
-            out.printf("Could not find a task with an ID of %d.", idString);
-            out.println();
+    public String check(String idString) {
+        if(!taskList.check(idString)){
+            return String.format("Could not find a task with an ID of %d.\n", idString);
         }
+        return "";
+    }
+
+    public String uncheck(String idString) {
+        if(!taskList.uncheck(idString)){
+            return String.format("Could not find a task with an ID of %d.\n", idString);
+        }
+        return "";
     }
     
 }
