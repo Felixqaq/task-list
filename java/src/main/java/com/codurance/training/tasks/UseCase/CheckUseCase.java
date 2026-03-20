@@ -9,14 +9,16 @@ public class CheckUseCase {
     }
 
     public String check(String idString) {
-        if(!taskList.check(idString)){
+        int id = Integer.parseInt(idString);
+        if(!taskList.check(id)){
             return String.format("Could not find a task with an ID of %d.\n", idString);
         }
         return "";
     }
 
     public String uncheck(String idString) {
-        if(!taskList.uncheck(idString)){
+        int id = Integer.parseInt(idString);
+        if(!taskList.uncheck(id)){
             return String.format("Could not find a task with an ID of %d.\n", idString);
         }
         return "";

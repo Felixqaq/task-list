@@ -12,40 +12,40 @@ public class TaskController{
     private CheckUseCase checkUseCase;
     private HelpUseCase helpUseCase;
     private ErrorUseCase errorUseCase;
-    private IConsole console;
 
     public TaskController(AddProjectUseCase addProjectUseCase, ShowUseCase showUseCase, CheckUseCase checkUseCase,
-            HelpUseCase helpUseCase, ErrorUseCase errorUseCase, IConsole console) {
+            HelpUseCase helpUseCase, ErrorUseCase errorUseCase) {
         this.addProjectUseCase = addProjectUseCase;
         this.showUseCase = showUseCase;
         this.checkUseCase = checkUseCase;
         this.helpUseCase = helpUseCase;
         this.errorUseCase = errorUseCase;
-        this.console = console;
     }
 
-    public void execute(String commandLine) {
+    public String execute(String commandLine) {
         String[] commandRest = commandLine.split(" ", 2);
         String command = commandRest[0];
+        String respose = "";
         switch (command) {
             case "show":
-                console.print(showUseCase.show());
+                respose = showUseCase.show();
                 break;
             case "add":
-                console.print(addProjectUseCase.add(commandRest[1]));
+                respose = addProjectUseCase.add(commandRest[1]);
                 break;
             case "check":
-                console.print(checkUseCase.check(commandRest[1]));
+                respose = checkUseCase.check(commandRest[1]);
                 break;
             case "uncheck":
-                console.print(checkUseCase.uncheck(commandRest[1]));
+                respose = checkUseCase.uncheck(commandRest[1]);
                 break;
             case "help":
-                console.print(helpUseCase.help());
+                respose = helpUseCase.help();
                 break;
             default:
-                console.print(errorUseCase.error(command));
+                respose = errorUseCase.error(command);
                 break;
         }
+        return respose;
     }
 }

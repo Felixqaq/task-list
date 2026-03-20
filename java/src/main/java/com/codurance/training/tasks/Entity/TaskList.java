@@ -1,24 +1,22 @@
 package com.codurance.training.tasks.Entity;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public final class TaskList {
 
-    private final LinkedList<Project> projects = new LinkedList<>();
+    private final ArrayList<Project> projects = new ArrayList<>();
 
     private long lastId = 0;
 
     public TaskList() {
     }
 
-    public LinkedList<Project> getProjects() {
+    public ArrayList<Project> getProjects() {
         return projects;
     }
 
-    public boolean addProject(String name) {
+    public void addProject(String name) {
         projects.add(new Project(name, new ArrayList<>()));
-        return true;
     }
 
     public boolean addTask(String projectName, String description) {
@@ -31,16 +29,15 @@ public final class TaskList {
         return false;
     }
 
-    public boolean check(String idString) {
-        return setDone(idString, true);
+    public boolean check(int id) {
+        return setDone(id, true);
     }
 
-    public boolean uncheck(String idString) {
-        return setDone(idString, false);
+    public boolean uncheck(int id) {
+        return setDone(id, false);
     }
 
-    private boolean setDone(String idString, boolean done) {
-        int id = Integer.parseInt(idString);
+    private boolean setDone(int id, boolean done) {
         for (Project project : projects) {
             for (Task task : project.getTasks()) {
                 if (task.getId() == id) {

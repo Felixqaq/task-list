@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
-import com.codurance.training.tasks.Adapter.IConsole;
 import com.codurance.training.tasks.Adapter.TaskController;
 import com.codurance.training.tasks.Entity.TaskList;
 import com.codurance.training.tasks.UseCase.AddProjectUseCase;
@@ -19,23 +18,20 @@ public class Main implements Runnable{
 
     private final BufferedReader in;
     private final PrintWriter out;
-    
-    private TaskList taskList = new TaskList();
-    private AddProjectUseCase addProjectUseCase = new AddProjectUseCase(taskList);
-    private ShowUseCase showUseCase = new ShowUseCase(taskList);
-    private CheckUseCase checkUseCase = new CheckUseCase(taskList);
-    private HelpUseCase helpUseCase = new HelpUseCase();
-    private ErrorUseCase errorUseCase = new ErrorUseCase();
-    private IConsole console;
-
     private TaskController taskController;
     
     public Main(BufferedReader reader, PrintWriter writer) {
         this.in = reader;
         this.out = writer;
-        this.console = new Console(out);
-        this.taskController = new TaskController(addProjectUseCase, showUseCase, checkUseCase, helpUseCase, errorUseCase, console);
-    
+        
+        TaskList taskList = new TaskList();
+        AddProjectUseCase addProjectUseCase = new AddProjectUseCase(taskList);
+        ShowUseCase showUseCase = new ShowUseCase(taskList);
+        CheckUseCase checkUseCase = new CheckUseCase(taskList);
+        HelpUseCase helpUseCase = new HelpUseCase();
+        ErrorUseCase errorUseCase = new ErrorUseCase();
+
+        this.taskController = new TaskController(addProjectUseCase, showUseCase, checkUseCase, helpUseCase, errorUseCase);
     }
 
     public static void main(String[] args) throws Exception {
@@ -58,7 +54,7 @@ public class Main implements Runnable{
             if (command.equals(QUIT)) {
                 break;
             }
-            taskController.execute(command);
+            out.print(taskController.execute(command));
         }
     }
 }
